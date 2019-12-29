@@ -330,6 +330,8 @@ public class GameFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(1000, 800);
 		this.setVisible(true);
+		this.setResizable(false);
+		this.setTitle("인디언 포커");
 
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override

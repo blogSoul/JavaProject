@@ -21,13 +21,35 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import client.controller.AppManager;
+
 public class WaitingRoomFrame extends JFrame {
-	public WaitingRoomFrame(LoginFrame loginFrame) throws IOException {
-		WaitingRoomFrame	_this			= this;
+
+	//data
+	public JLabel			profileLabel;
+	public JLabel			idLabel;
+
+	public BufferedImage	backPicture;
+
+	public JButton			rankButton;
+	public JButton			logoutButton;
+	public JButton			exitButton;
+
+	public JTable			roomTabel;
+
+	public WaitingRoomFrame	waitingRoomFrame;
+	public LoginFrame		loginFrame;
+	public RankingFrame		rankingFrame;
+
+	//method
+	public WaitingRoomFrame() throws IOException {
+
+		waitingRoomFrame	= this;
+		loginFrame			= AppManager.getInstanceManager().getLogin();
 
 		// 프로필사진 레이블
-		JLabel				profileLabel	= new JLabel();
-		BufferedImage		backPicture		= ImageIO.read(new File("img/profile.jpg"));
+		profileLabel		= new JLabel();
+		backPicture			= ImageIO.read(new File("img/profile.jpg"));
 		profileLabel.setIcon(new ImageIcon(backPicture));
 		profileLabel.setBounds(50, 80, 200, 145);
 		profileLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -35,7 +57,7 @@ public class WaitingRoomFrame extends JFrame {
 		this.add(profileLabel);
 
 		// ID 레이블
-		JLabel idLabel = new JLabel("홍길동");
+		idLabel = new JLabel("홍길동");
 		idLabel.setBounds(50, 200, 200, 80);
 		idLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		idLabel.setFont(new Font("San Serif", Font.PLAIN, 25));
@@ -43,7 +65,7 @@ public class WaitingRoomFrame extends JFrame {
 		this.add(idLabel);
 
 		// 랭킹 레이블
-		JButton rankButton = new JButton("Rank");
+		rankButton = new JButton("Rank");
 		rankButton.setBounds(75, 300, 150, 40);
 		rankButton.setFont(new Font("San Serif", Font.PLAIN, 25));
 		rankButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -51,26 +73,31 @@ public class WaitingRoomFrame extends JFrame {
 		rankButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RankingFrame rankingFrame = new RankingFrame();
+				if (rankingFrame == null) {
+					rankingFrame = new RankingFrame();
+					AppManager.getInstanceManager().setRanking(rankingFrame);
+				} else {
+					AppManager.getInstanceManager().getRanking().openRanking();
+				}
 			}
 		});
 		this.add(rankButton);
 
 		// 로그아웃 버튼
-		JButton logoutButton = new JButton("Logout");
+		logoutButton = new JButton("Logout");
 		logoutButton.setBounds(720, 30, 100, 40);
 		logoutButton.setVisible(true);
 		logoutButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				closeWaitingRoom();
-				loginFrame.setVisible(true);
+				loginFrame.openLoginFrame();
 			}
 		});
 		this.add(logoutButton);
 
 		// 나가기 버튼
-		JButton exitButton = new JButton("Exit");
+		exitButton = new JButton("Exit");
 		exitButton.setBounds(830, 30, 100, 40);
 		exitButton.setVisible(true);
 		exitButton.addActionListener(new ActionListener() {
@@ -91,7 +118,7 @@ public class WaitingRoomFrame extends JFrame {
 		// 테이블의 각 컬럼이름 (실제로 노출은 안됨)
 		String[]	tableColumnNames	= { "방 제목", "인원 수" };
 		// 방 목록을 보여주는 테이블
-		JTable		roomTabel			= new JTable(roomList, tableColumnNames);
+		roomTabel = new JTable(roomList, tableColumnNames);
 		roomTabel.setDefaultEditor(Object.class, null);
 		roomTabel.setBounds(400, 80, 530, 480);
 		roomTabel.setRowHeight(160);
@@ -116,7 +143,7 @@ public class WaitingRoomFrame extends JFrame {
 				int		row		= roomTabel.rowAtPoint(point);
 				if (mouseEvent.getClickCount() == 2 && roomTabel.getSelectedRow() != -1) {
 					try {
-						GameFrame gameFrame = new GameFrame(_this);
+						GameFrame gameFrame = new GameFrame(waitingRoomFrame);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -131,6 +158,8 @@ public class WaitingRoomFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1000, 800);
 		this.setVisible(true);
+		this.setResizable(false);
+		this.setTitle("대기실");
 
 	}
 
@@ -138,4 +167,4 @@ public class WaitingRoomFrame extends JFrame {
 		this.setVisible(false);
 	}
 
-}
+}//WaitingRoomFrame class

@@ -1,0 +1,20 @@
+﻿2019/12/30  -V0.1
+<View>파트
+1. Controller에서 View 컴포넌트의 객체 정보가 필요하기 때문에, 컴포넌트 변수를 생성자에서 선언했던 것을 필드 부분에서 선언하도록 수정
+1-1. Controller에서 동일한 Frame 객체를 불러오기 위해, 싱글톤 기법을 적용한 AppManager 클래스 생성
+
+2. 모든 Frame에 setResizable(false) 설정 및 각 Frame에 맞는 setTtile 설정
+
+3. 버튼을 눌렀을 때, 새로운 SignupFrame 객체가 계속해서 생성되고, 나가도 리소스는 점유하는 문제 수정
+>>LoginFrame에 SignupFrame을 필드변수로 선언하여, 단 하나의 SignupFrame 객체만 생성될 수 있도록 함
+3-1. SignupFrame의 radio버튼은 한 번 선택하면 해제할 수 없는 이슈를 가지고 있음
+>>하나의 SignupFrame 객체만 유지할 때는 이전 동의/비동의 선택 여부가 계속 남음
+>>radio버튼을 checkbox버튼으로 바꾸고, checkbox버튼이 마치 radio버튼과 같은 매커니즘을 수행할 수 있도록 함
+
+4. LoginFrame, SignupFrame의 비밀번호 부분을 JTextField에서 JPasswordField로 수정
+
+5. 버튼을 눌렀을 때, 새로운 RankongFrame 객체가 계속해서 생성되고, 나가도 리소스는 점유하는 문제 수정
+>>WaitingRoomFrame에 RankongFrame을 필드변수로 선언하여, 단 하나의 RankongFrame 객체만 생성될 수 있도록 함
+
+
+
