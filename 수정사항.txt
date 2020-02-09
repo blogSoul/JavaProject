@@ -16,5 +16,12 @@
 5. 버튼을 눌렀을 때, 새로운 RankongFrame 객체가 계속해서 생성되고, 나가도 리소스는 점유하는 문제 수정
 >>WaitingRoomFrame에 RankongFrame을 필드변수로 선언하여, 단 하나의 RankongFrame 객체만 생성될 수 있도록 함
 
+2020-02-01
+코드 구현 부분을 제외한 모든 부분을 삭제 및 환경 변수 설정 
 
+사용한 라이브러리:
+gson-2.8.0
+gson-2.8.0-javadoc
+gson-2.8.0-sources
+mysql-connecter-java-8.0.18
 
