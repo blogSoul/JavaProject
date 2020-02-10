@@ -2,7 +2,7 @@
 
 #  IndianPoker Network Game _2019 객체지향기술 팀프로젝트
 ![img](https://img.shields.io/badge/Platform--orange)     ![project_start_date](https://img.shields.io/badge/Project%20Start%20Date-2019--12--15-informational.svg)
-> 그림이라는 재능을 사고 팔 수 있는 쇼핑몰 형식 서비스
+> 인디언 포커게임을 온라인으로 1:1 대결을 즐길 수 있는 서비스
 
 
 ## :memo:프로젝트 개요
